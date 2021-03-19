@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request, make_response , redirect, url_for, re
 import jwt
 import os
 import datetime
+import time
 
 app=Flask(__name__)
 
@@ -14,5 +15,11 @@ def clock():
     t2 = "1609459200"
     answer = int(t)-int(t2)
     return jsonify({"DowellClock is":answer})
+@app.route('/dowellclocks',methods=['GET'])
+def UXclock():
+    current_time= time.time()
+    t = "1609459200"
+    answer= int(current_time)-int(t)
+    return jsonify({"answer":answer})
 
 app.run()
