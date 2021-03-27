@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>
+time
+</title>
+
+<style>
+h1 {
+color: green;
+}
+
+body {
+text-align: center;
+}
+</style>
+</head>
+
+<body>
+<h1>Converting</h1>
+
+<button onclick="getTime()">Get UTC Time</button>
+
+<p id="getTime"></p>
+<button onclick="convert()">
+Convert UTC to Local
+</button>
+
+<p id="convert"></p>
+
+<script>
+function addZero(i) {
+if (i < 10) {
+i = "0" + i;
+}
+return i;
+}
+
+function getTime() {
+var d = new Date();
+var x = document.getElementById("getTime");
+var h = addZero(d.getUTCHours());
+var m = addZero(d.getUTCMinutes());
+var s = addZero(d.getUTCSeconds());
+var time = h + ":" + m + ":" + s
+x.innerHTML = "Current UTC Time:" + time;
+
+}
+
+function convert() {
+var theDate = new Date();
+var local = theDate.toString();
+document.getElementById("convert").innerHTML = "Local Time: "+ local;
+}
+</script>
+</body>
+
+</html>
