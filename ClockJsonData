@@ -1,5 +1,6 @@
 from flask import Flask, request
 from flask_cors import CORS
+import time
 
 app = Flask(__name__)
 CORS(app)
@@ -8,13 +9,17 @@ CORS(app)
 @app.route('/data', methods =["GET", "POST"])
 def jsonData():
     if request.method == "POST":
-       time1 = request.form.get("t1")
-       time2 = request.form.get("t2")
-       time3 =request.form.get("t3")
-       ip = request.form.get("IP")
-       BrowserLanguage = request.form.get("Language")
-       print(request.get_json())
-       return "Time1 is "+ time1 + "\n Time2 is " + time2 + "\n Time3 is" + time3 + "\n IP is" + ip + "\n Language is" +  BrowserLanguage 
+        t2= time.time()
+        t = "1609459200"
+        t1= int(t2)-int(t)
+       #time1 = request.form.get("t1")
+       #time2 = request.form.get("t2")
+        time3 =request.form.get("t3")
+        ip = request.form.get("IP")
+        BrowserLanguage = request.form.get("Language")
+        Timezone = request.form.get("Timezone")
+        print(request.get_json())
+        return "Timezone is "+ Timezone + "\n  Time3 is" + time3 + "\n IP is" + ip + "\n Language is" +  BrowserLanguage + "\n DowellClock is " + t1
 
 
 if __name__ == '__main__':
