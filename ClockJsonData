@@ -24,3 +24,52 @@ def jsonData():
 
 if __name__ == '__main__':
     app.run()
+
+
+from flask import Flask, request ,jsonify
+from flask_cors import CORS
+from datetime import datetime
+import pytz
+import time
+
+app = Flask(__name__)
+CORS(app)
+
+
+@app.route('/data', methods =["GET", "POST"])
+def jsonData():
+    #if request.method == "POST":
+        unixtime= time.time()
+        dowellstarttime = "1609459200"
+        #t1= int(unixtime)-int(dowellstarttime)
+       #time1 = request.form.get("t1")
+       #time2 = request.form.get("t2")
+        #t1= 5
+        t3 =request.form.get("t3")
+        ip = request.form.get("IP")
+        Language = request.form.get("Language")
+        Timezone = request.form.get("Timezone")
+        timezonename = pytz.timezone(Timezone)
+        t2 = datetime.now(timezonename)
+        print(request.get_json())
+        return "Timezone is " + Timezone + "\n t3 is " + t3 + "\n ip " + ip + "\n Language" + Language
+
+@app.route('/time',  methods =["GET", "POST"])
+def a():
+    t3 =request.form.get("t3")
+    ip = request.form.get("IP")
+    Language = request.form.get("Language")
+    Timezone = request.form.get("Timezone")
+    print(request.get_json())
+    unixtime= time.time()
+    dowellstarttime = "1609459200"
+    t1= int(unixtime)-int(dowellstarttime)
+    timezonename = pytz.timezone(Timezone)
+    t2 = datetime.now(timezonename)
+
+    return "t3"+t3+"\nip"+ip+"\nLanguage"+Language+"\nTimezone"+Timezone+"t1"+str(t1)+"\nt2"+str(t2)
+
+
+
+if __name__ == '__main__':
+    app.run()
