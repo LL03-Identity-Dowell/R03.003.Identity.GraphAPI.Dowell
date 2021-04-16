@@ -1,0 +1,41 @@
+from flask import Flask, jsonify, request
+
+from datetime import datetime
+import time
+import pytz
+from flask_cors import CORS
+
+
+app= Flask(__name__)
+CORS(app)
+
+@app.route('/clock', methods =["GET", "POST"])
+def clock():
+    if request.method == "POST":
+       first_name = request.form.get("t3")
+       last_name = request.form.get("IP")
+       Timezone = request.form.get("Timezone")
+       unixtime= time.time()
+       dowellstarttime = "1609459200"
+       t1= int(unixtime)-int(dowellstarttime)
+       import pytz
+       from datetime import datetime
+       timezonename = pytz.timezone(Timezone)
+       t2 = datetime.now(timezonename)
+       print(request.get_json())
+       return jsonify({"t3":first_name , "IP":last_name , "TimeZone":Timezone , "t1":str(t1),"t2":str(t2)})
+      
+
+@app.route('/event', methods =["GET", "POST"])
+def event():
+    if request.method == "POST":
+        first_name = request.form.get("t3")
+        last_name = request.form.get("IP")
+        Timezone = request.form.get("Timezone")
+        t1= request.form.get("t1")
+        t2= request.form.get("t2")
+        print(request.get_json())
+        return jsonify({"t3":first_name , "IP":last_name , "TimeZone":Timezone , "T1":t1 , "T2":t2})
+
+if __name__ == '__main__':
+    app.run()
